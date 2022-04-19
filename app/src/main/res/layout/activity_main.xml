@@ -7,22 +7,69 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <android.widget.Button
+        android:id="@+id/button1"
+        android:layout_width="100dp"
+        android:layout_height="48dp"
+        android:text="@string/yura"
+        app:layout_constraintBottom_toTopOf="@id/editText"
+        app:layout_constraintEnd_toStartOf="@id/button2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <android.widget.Button
+        android:id="@+id/button2"
+        android:layout_width="100dp"
+        android:layout_height="48dp"
+        android:text="@string/natasha"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/button1"
+        app:layout_constraintTop_toTopOf="parent"
+
+        />
+
+    <android.widget.EditText
+        android:id="@+id/editText"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:inputType="text"
+        android:minWidth="48dp"
+        android:minHeight="48dp"
+        app:layout_constraintBottom_toTopOf="@id/recyclerView"
+        app:layout_constraintEnd_toStartOf="@+id/buttonAdd"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/button1"
+        android:background="@drawable/edit_text_background"
+        />
+
+    <android.widget.Button
+        android:id="@+id/buttonAdd"
+        android:layout_width="100dp"
+        android:layout_height="48dp"
+        android:text="@string/buttonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/editText"
+        app:layout_constraintTop_toBottomOf="@id/button2"
+         />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_margin="16dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toTopOf="@id/simpleCalendarView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        />
+        app:layout_constraintTop_toBottomOf="@id/editText" />
 
     <android.widget.CalendarView
         android:id="@+id/simpleCalendarView"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

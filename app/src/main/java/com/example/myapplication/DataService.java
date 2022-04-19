@@ -9,7 +9,7 @@ import org.json.JSONObject;
 import java.util.List;
 
 public class DataService {
-    public static final String URL = "https://zen-calendar.herokuapp.com/api/v1/1/";
+    public static final String URL = "https://zen-calendar.herokuapp.com/api/v1/family/1/";
     Context context;
 
     public DataService(Context context) {
@@ -20,9 +20,9 @@ public class DataService {
         void onResponse();
     }
 
-    public void getData(List<String> list, ResponseListener responseListener, int month, int year) {
+    public void getData(List<String> list, ResponseListener responseListener, int day, int month, int year) {
         list.clear();
-        String url = URL + month + "/" + year;
+        String url = URL + day + "/" + month + "/" + year;
 
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null,
                 response -> {

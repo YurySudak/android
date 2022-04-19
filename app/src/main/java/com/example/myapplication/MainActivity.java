@@ -4,10 +4,13 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.ItemTouchHelper;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.CalendarView;
+import android.widget.EditText;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -18,38 +21,46 @@ public class MainActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
     RecyclerAdapter recyclerAdapter;
+    int day;
     int month;
     int year;
     List<String> notesList = new ArrayList<>();
-    CalendarView simpleCalendarView;
+    CalendarView calendarView;
+    EditText editText;
+    Button button1;
+    Button button2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         DataService dataService = new DataService(this);
+
+        editText = findViewById(R.id.editText);
+        button1 = findViewById(R.id.button1);
+        button2 = findViewById(R.id.button2);
+        button1.setActivated(false);
 
         Calendar calendar = Calendar.getInstance();
         MainActivity.this.month = calendar.get(Calendar.MONTH) + 1;
         MainActivity.this.year = calendar.get(Calendar.YEAR);
 
         dataService.getData(notesList, () -> recyclerView.getAdapter().notifyDataSetChanged(),
-                MainActivity.this.month, MainActivity.this.year);
+                day, month, year);
 
-        simpleCalendarView = (CalendarView) findViewById(R.id.simpleCalendarView);
-        simpleCalendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
-            @Override
-            public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {
-                MainActivity.this.month = month + 1;
-                MainActivity.this.year = year;
-                dataService.getData(notesList, () -> recyclerView.getAdapter().notifyDataSetChanged(),
-                        MainActivity.this.month, MainActivity.this.year);
-            }
+        calendarView = (CalendarView) findViewById(R.id.simpleCalendarView);
+        calendarView.setOnDateChangeListener((view, y, m, d) -> {
+            day = d;
+            month = m + 1;
+            year = y;
+            dataService.getData(notesList, () -> recyclerView.getAdapter().notifyDataSetChanged(),
+                    day, month, year);
         });
 
         recyclerView = findViewById(R.id.recyclerView);
         recyclerAdapter = new RecyclerAdapter(notesList);
-//        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+//       recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(recyclerAdapter);
 
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
