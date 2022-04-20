@@ -51,7 +51,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
             //imageView = itemView.findViewById(R.id.imageView);
             textView = itemView.findViewById(R.id.textView);
-           // rowCountTextView = itemView.findViewById(R.id.rowCountTextView);
+            // rowCountTextView = itemView.findViewById(R.id.rowCountTextView);
 
             itemView.setOnClickListener(this);
         }

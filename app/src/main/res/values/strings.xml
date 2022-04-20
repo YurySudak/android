@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">Список дел</string>
-    <string name="buttonName">Добавить</string>
+    <string name="save">Сохранить</string>
     <string name="yura">Юра</string>
     <string name="natasha">Наташа</string>
+    <string name="add">Добавить</string>
+    <string name="settings">Настройки</string>
 </resources>

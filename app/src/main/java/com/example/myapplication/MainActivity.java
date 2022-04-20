@@ -4,13 +4,14 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.ItemTouchHelper;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.CalendarView;
-import android.widget.EditText;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -26,9 +27,14 @@ public class MainActivity extends AppCompatActivity {
     int year;
     List<String> notesList = new ArrayList<>();
     CalendarView calendarView;
-    EditText editText;
-    Button button1;
-    Button button2;
+    Button buttonYury;
+    Button buttonNatasha;
+    Button buttonInput;
+
+    public void toInput(View view) {
+        Intent intent = new Intent(this, InputActivity.class);
+        startActivity(intent);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,10 +43,13 @@ public class MainActivity extends AppCompatActivity {
 
         DataService dataService = new DataService(this);
 
-        editText = findViewById(R.id.editText);
-        button1 = findViewById(R.id.button1);
-        button2 = findViewById(R.id.button2);
-        button1.setActivated(false);
+
+        buttonYury = findViewById(R.id.buttonYura);
+        buttonNatasha = findViewById(R.id.buttonNatasha);
+        buttonInput = findViewById(R.id.buttonInput);
+
+
+        buttonYury.setActivated(false);
 
         Calendar calendar = Calendar.getInstance();
         MainActivity.this.month = calendar.get(Calendar.MONTH) + 1;
@@ -68,7 +77,11 @@ public class MainActivity extends AppCompatActivity {
 
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleCallback);
         itemTouchHelper.attachToRecyclerView(recyclerView);
+
     }
+
+
+
 
     ItemTouchHelper.SimpleCallback simpleCallback = new ItemTouchHelper.SimpleCallback(ItemTouchHelper.UP | ItemTouchHelper.DOWN | ItemTouchHelper.START | ItemTouchHelper.END, 0) {
         @Override
@@ -86,5 +99,19 @@ public class MainActivity extends AppCompatActivity {
 
         }
     };
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.settings:
+                // User chose the "Settings" item, show the app settings UI...
+                return true;
+            default:
+                // If we got here, the user's action was not recognized.
+                // Invoke the superclass to handle it.
+                return super.onOptionsItemSelected(item);
+
+        }
+    }
 
 }
